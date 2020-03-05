@@ -8,16 +8,39 @@
     />
     <title>Tab Cleanup</title>
   </head>
+  <p>
+    <span class="highlight">Custom declutter:</span> Set a custom timer to
+    declutter all other tabs.
+  </p>
   <body>
-    <input placeholder="Hr" type="number" max="59" min="0" id="hr-input"/>
-    <input placeholder="Min" type="number" max="59" min="0" id="min-input"/>
-    <input placeholder="Sec" type="number" max="59" min="0" id="sec-input"/>
-    <button id="time-input-button">Do It</button>
-    <p>
-      <span class="highlight">Timed declutter:</span> Declutter all other tabs
-      in 5 seconds
-    </p>
-    <button class="btn" id="5-sec-btn">5-Sec Declutter</button>
+    <div class="time-input-container">
+      <div class="time-input">
+        <span>Hours: </span>
+        <input placeholder="Hr" type="number" max="59" min="0" id="hr-input" />
+      </div>
+      <div class="time-input">
+        <span>Minutes: </span
+        ><input
+          placeholder="Min"
+          type="number"
+          max="59"
+          min="0"
+          id="min-input"
+        />
+      </div>
+
+      <div class="time-input">
+        <span>Seconds: </span>
+        <input
+          placeholder="Sec"
+          type="number"
+          max="59"
+          min="0"
+          id="sec-input"
+        />
+      </div>
+    </div>
+    <button id="time-input-button" class="btn">Do It</button>
     <p>
       <span class="highlight">Timed declutter:</span> Declutter all other tabs
       in 5 minutes
