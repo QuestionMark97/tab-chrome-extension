@@ -36,5 +36,5 @@ const tabs = new Tabs();
 chrome.runtime.onMessage.addListener(message => {
   console.log(message);
 
-  tabs.removeTabs(parseInt(message.time));
+  tabs.removeTabs(message.time);
 });
