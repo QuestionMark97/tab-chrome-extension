@@ -4,51 +4,50 @@
 class Tabs {
   constructor() {
     this.initDate = new Date();
-    this.timer = [];
+    this.timer = null;
+    this.time = 0;
   }
 
-  removeTabs(time) {
-    if (this.timer[0] === undefined) {
-      console.log('hi');
-      chrome.tabs.query({ currentWindow: true }, tabs => {
-        for (let i = 0; i < tabs.length; i++) {
-          if (tabs[i].active === false) this.createTimer(tabs[i].id, time);
+  createTimer(time) {
+    if (this.timer === null) {
+      this.timer = setInterval(() => {
+        if ((++this.time) * 1000 === time) {
+          this.removeTabs();
+          this.clearTimer();
         }
-      });
+      }, 1000);
+      this.initDate = new Date();
     } else this.editTimer(time);
   }
 
-  createTimer(tabId, time) {
-    this.timer.push(
-      setTimeout(() => {
-        chrome.tabs.remove(tabId);
-        this.timer = [];
-      }, time)
-    );
-    this.initDate = new Date();
+  removeTabs() {
+    chrome.tabs.query({ currentWindow: true }, (tabs) => {
+      for (let i = 0; i < tabs.length; i++) {
+        if (tabs[i].active === false) chrome.tabs.remove(tabs[i].id);
+      }
+    });
   }
 
-  clearTimers() {
-    for (let i = 0; i < this.timer.length; i++) clearTimeout(this.timer[i]);
-    this.timer = [];
+  clearTimer() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 
-  editTimer(newTime) {
-    // this.clearTimers();
-    // const elapsed = new Date() - this.initDate;
-    // if (elapsed > newTime) {
-    //   this.removeTabs(newTime - elapsed);
-    // }
-  }
+  // editTimer(newTime) {
+  //   // this.clearTimer();
+  //   // const elapsed = new Date() - this.initDate;
+  //   // if (elapsed > newTime) {
+  //   //   this.removeTabs(newTime - elapsed);
+  //   // }
+  // }
 }
 
 const tabs = new Tabs();
 
-chrome.runtime.onMessage.addListener(message => {
-  console.log(message);
+chrome.runtime.onMessage.addListener((message) => {
   if (message.hasOwnProperty('time')) {
-    tabs.removeTabs(message.time);
+    tabs.createTimer(message.time);
   } else if (message.hasOwnProperty('clear')) {
-    tabs.clearTimers();
+    tabs.clearTimer();
   }
 });
