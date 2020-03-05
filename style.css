@@ -31,8 +31,10 @@ body {
 }
 
 .time-input {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
+  gap: 1rem;
 }
 
 .btn {
@@ -59,6 +61,14 @@ body {
 
 .btn:focus {
   outline: none;
+}
+
+.clear-btn {
+  background-color: #ff4fdc;
+}
+
+.clear-btn:hover {
+  background-color: #ff7ce5;
 }
 
 p {
