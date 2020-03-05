@@ -8,7 +8,7 @@ class Tabs {
   }
 
   removeTabs(time) {
-    chrome.tabs.query({ currentWindow: true }, (tabs) => {
+    chrome.tabs.query({ currentWindow: true }, tabs => {
       for (let i = 0; i < tabs.length; i++) {
         if (tabs[i].active === false) this.createTimer(tabs[i].id, time);
       }
@@ -33,4 +33,8 @@ class Tabs {
 
 const tabs = new Tabs();
 
-chrome.runtime.onMessage.addListener(() => tabs.removeTabs(1000));
+chrome.runtime.onMessage.addListener(message => {
+  console.log(message);
+
+  tabs.removeTabs(parseInt(message.time));
+});

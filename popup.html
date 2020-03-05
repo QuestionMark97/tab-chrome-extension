@@ -2,14 +2,27 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
     <title>Tab Cleanup</title>
   </head>
   <body>
     <p>
-      Your first tab will always stay open, but your other tabs will
-      automatically close 5 minutes after you open them.
+      <span class="highlight">Timed declutter:</span> Declutter all other tabs
+      in 5 seconds
     </p>
-    <button class="btn" id="btn">Do Stuff</button>
+    <button class="btn" id="5-sec-btn">5-Sec Declutter</button>
+    <p>
+      <span class="highlight">Timed declutter:</span> Declutter all other tabs
+      in 5 minutes
+    </p>
+    <button class="btn" id="5-min-btn">5-Min Declutter</button>
+    <p>
+      <span class="highlight">Declutter now:</span> Close all tabs except for
+      your current tab.
+    </p>
     <button class="btn" id="declutter">Declutter Now</button>
     <script src="popup.js"></script>
   </body>
