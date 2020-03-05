@@ -16,13 +16,16 @@
 //   });
 // });
 
-chrome.commands.onCommand.addListener(function(command) {
-  if (command == 'close-tab') {
-    // get second tab
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-      let current = tabs[1];
-      console.log(tabs);
-      chrome.tabs.remove(13);
+chrome.commands.onCommand.addListener((command) => {
+  if (command === 'close-tab') {
+    chrome.tabs.query({ currentWindow: true }, (tabs) => {
+      for (let i = 0; i < tabs.length; i++) {
+        if (tabs[i].active === false) {
+          setTimeout(() => {
+            chrome.tabs.remove(tabs[i].id);
+          }, 1000);
+        }
+      }
     });
   }
 });
