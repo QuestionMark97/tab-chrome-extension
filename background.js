@@ -11,7 +11,8 @@ class Tabs {
   createTimer(time) {
     if (this.timer === null) {
       this.timer = setInterval(() => {
-        if ((++this.time) * 1000 === time) {
+        chrome.runtime.sendMessage({ value: time / 1000 - ++this.time });
+        if ((this.time) * 1000 === time) {
           this.removeTabs();
           this.clearTimer();
         }

@@ -1,7 +1,7 @@
 const declutter = document.getElementById('declutter');
 
 const cancelTimer = document.getElementById('clear-timer-btn');
-
+const display = document.getElementById('timer');
 const hr = document.getElementById('hr-input');
 const min = document.getElementById('min-input');
 const sec = document.getElementById('sec-input');
@@ -30,4 +30,9 @@ declutter.addEventListener('click', () => {
       }
     }
   });
+});
+
+// Display timer
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.hasOwnProperty('value')) display.value = message.value;
 });
