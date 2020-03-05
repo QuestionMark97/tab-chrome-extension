@@ -1,0 +1,27 @@
+{
+  "name": "Tab Cleanup",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "declarativeContent",
+    "http://*/",
+    "https://*/"
+  ],
+  "description": "Manages tabs",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "commands": {
+    "close-tab": {
+      "suggested_key": { "default": "Alt+Shift+P" },
+      "description": "Close second tab"
+    }
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}
