@@ -4,36 +4,45 @@
 class Tabs {
   constructor() {
     this.initDate = new Date();
-    this.timer = 0;
+    this.timer = [];
   }
 
   removeTabs(time) {
-    chrome.tabs.query({ currentWindow: true }, tabs => {
-      for (let i = 0; i < tabs.length; i++) {
-        if (tabs[i].active === false) this.createTimer(tabs[i].id, time);
-      }
-    });
+    if (this.timer[0] === undefined) {
+      console.log('hi');
+      chrome.tabs.query({ currentWindow: true }, (tabs) => {
+        for (let i = 0; i < tabs.length; i++) {
+          if (tabs[i].active === false) this.createTimer(tabs[i].id, time);
+        }
+      });
+    } else this.editTimer(time);
   }
 
   createTimer(tabId, time) {
-    this.timer = setTimeout(() => {
+    this.timer.push(setTimeout(() => {
       chrome.tabs.remove(tabId);
-    }, time);
+      this.timer = [];
+    }, time));
     this.initDate = new Date();
   }
 
+  clearTimers() {
+    for (let i = 0; i < this.timer.length; i++) clearTimeout(this.timer[i]);
+    this.timer = [];
+  }
+
   editTimer(newTime) {
-    clearTimeout(this.timer);
-    const elapsed = new Date() - this.initDate;
-    if (elapsed > newTime) {
-      removeTabs(newTime - elapsed);
-    }
+    // this.clearTimers();
+    // const elapsed = new Date() - this.initDate;
+    // if (elapsed > newTime) {
+    //   this.removeTabs(newTime - elapsed);
+    // }
   }
 }
 
 const tabs = new Tabs();
 
-chrome.runtime.onMessage.addListener(message => {
+chrome.runtime.onMessage.addListener((message) => {
   console.log(message);
 
   tabs.removeTabs(message.time);
