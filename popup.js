@@ -1,6 +1,5 @@
 const btn = document.getElementById('btn');
 const declutter = document.getElementById('declutter');
-const fiveMin = document.getElementById('5-min-btn');
 
 const hr = document.getElementById('hr-input');
 const min = document.getElementById('min-input');
@@ -14,10 +13,6 @@ timeButton.addEventListener('click', () => {
   const time = ((hr.value * 60 + min.value) * 60 + sec.value) * 1000;
   timeArr.push(time);
   chrome.runtime.sendMessage({ time: timeArr[0] });
-});
-
-fiveMin.addEventListener('click', () => {
-  chrome.runtime.sendMessage({ time: 1000 });
 });
 
 // Instant declutter
