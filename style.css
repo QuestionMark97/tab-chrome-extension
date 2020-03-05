@@ -13,6 +13,8 @@ body {
 
 :root {
   --highlight: #ffc600;
+  --cancel: #c0392b;
+  --cancel-lighten: #e74c3c;
 }
 
 .time-input-container {
@@ -64,11 +66,11 @@ body {
 }
 
 .clear-btn {
-  background-color: #ff4fdc;
+  background-color: var(--cancel-lighten);
 }
 
 .clear-btn:hover {
-  background-color: #ff7ce5;
+  background-color: var(--cancel);
 }
 
 p {

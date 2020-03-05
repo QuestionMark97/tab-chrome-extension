@@ -10,7 +10,7 @@ class Tabs {
   removeTabs(time) {
     if (this.timer[0] === undefined) {
       console.log('hi');
-      chrome.tabs.query({ currentWindow: true }, (tabs) => {
+      chrome.tabs.query({ currentWindow: true }, tabs => {
         for (let i = 0; i < tabs.length; i++) {
           if (tabs[i].active === false) this.createTimer(tabs[i].id, time);
         }
@@ -19,10 +19,12 @@ class Tabs {
   }
 
   createTimer(tabId, time) {
-    this.timer.push(setTimeout(() => {
-      chrome.tabs.remove(tabId);
-      this.timer = [];
-    }, time));
+    this.timer.push(
+      setTimeout(() => {
+        chrome.tabs.remove(tabId);
+        this.timer = [];
+      }, time)
+    );
     this.initDate = new Date();
   }
 
@@ -42,8 +44,11 @@ class Tabs {
 
 const tabs = new Tabs();
 
-chrome.runtime.onMessage.addListener((message) => {
+chrome.runtime.onMessage.addListener(message => {
   console.log(message);
-
-  tabs.removeTabs(message.time);
+  if (message.hasOwnProperty('time')) {
+    tabs.removeTabs(message.time);
+  } else if (message.hasOwnProperty('clear')) {
+    tabs.clearTimers();
+  }
 });
