@@ -9,7 +9,9 @@
     <title>Tab Cleanup</title>
   </head>
   <body>
-    <input type="number" id="time-input" />
+    <input placeholder="Hr" type="number" max="59" min="0" id="hr-input"/>
+    <input placeholder="Min" type="number" max="59" min="0" id="min-input"/>
+    <input placeholder="Sec" type="number" max="59" min="0" id="sec-input"/>
     <button id="time-input-button">Do It</button>
     <p>
       <span class="highlight">Timed declutter:</span> Declutter all other tabs
