@@ -9,10 +9,19 @@
   transition: all 0.3s ease;
   border: none;
   color: #ccc;
+  outline: none;
 }
 .btn:hover {
   color: white;
   background-color: #3498db;
+}
+
+.btn:active {
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn: focus {
+  outline: none;
 }
 
 p {
