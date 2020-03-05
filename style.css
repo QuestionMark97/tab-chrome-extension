@@ -36,6 +36,8 @@ header h1 {
 
 .time-input-container input {
   margin: 0.5rem 0;
+  background-color: rgb(48, 48, 48);
+  color: var(--highlight);
 }
 
 .time-input span {

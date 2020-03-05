@@ -34,5 +34,17 @@ declutter.addEventListener('click', () => {
 
 // Display timer
 chrome.runtime.onMessage.addListener((message) => {
-  if (message.hasOwnProperty('value')) display.value = message.value;
+  if (message.hasOwnProperty('value')) display.value = formatTime(message.value);
 });
+
+function formatTime(seconds) {
+  let s = seconds;
+  let m = Math.floor(s / 60);
+  let h = Math.floor(m / 60);
+  s -= m * 60;
+  m -= h * 60;
+  s = (s < 10) ? `0${s}` : s;
+  m = (m < 10) ? `0${m}` : m;
+  h = (h < 10) ? `0${h}` : h;
+  return `${h}:${m}:${s}`;
+}

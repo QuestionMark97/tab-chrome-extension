@@ -18,7 +18,7 @@ class Tabs {
         }
       }, 1000);
       this.initDate = new Date();
-    } else this.editTimer(time);
+    } // else this.editTimer(time);
   }
 
   removeTabs() {
@@ -32,6 +32,8 @@ class Tabs {
   clearTimer() {
     clearInterval(this.timer);
     this.timer = null;
+    this.time = 0;
+    chrome.runtime.sendMessage({ value: 0 });
   }
 
   // editTimer(newTime) {
